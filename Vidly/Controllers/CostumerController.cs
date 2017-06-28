@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -8,34 +8,35 @@ namespace Vidly.Controllers
 {
     public class CostumerController : Controller
     {
+        private Contexto _context;
+
+        public CostumerController()
+        {
+            _context = new Contexto();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ActionResult Index()
         {
-            var viewModel = new CostumerIndexViewModel{ Costumers = FillCostumers() };
+            var costumers = _context.Costumers.Include(x => x.MembershipType).ToList();
+
+            var viewModel = new CostumerIndexViewModel { Costumers = costumers };
 
             return View(viewModel);
         }
 
         public ActionResult Edit(int id)
         {
-            var viewModel = new CostumerIndexViewModel { Costumers = FillCostumers() };
+            var costumer = _context.Costumers.SingleOrDefault(s => s.Id == id);
 
-            if (viewModel.Costumers.Any(a => a.Id == id))
-            {
-                return View(viewModel.Costumers.First(f => f.Id == id));
-            }
+            if (costumer == null)
+                return HttpNotFound();
 
-            return HttpNotFound();
-        }
-
-        private List<Costumer> FillCostumers()
-        {
-            return new List<Costumer>
-            {
-                new Costumer {Id = 1, Name = "Jane Doe" },
-                new Costumer {Id = 2, Name = "Mark Garret" },
-                new Costumer {Id = 3, Name = "Francis J. Underwood" },
-                new Costumer {Id = 4, Name = "Lana del Rey" },
-            };
+            return View(costumer);
         }
     }
 }

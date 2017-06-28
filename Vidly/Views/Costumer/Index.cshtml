@@ -6,10 +6,11 @@
 
 <h2>Costumers</h2>
 
-<table>
+<table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <td>Costumer List</td>
+            <th>Costumer List</th>
+            <th>Discount Rate</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
             {
                 <tr>
                     <td>@Html.ActionLink(costumer.Name, "Edit", new {id = costumer.Id})</td>
+                    <td>@costumer.MembershipType.DiscountRate%</td>
                 </tr>
             }
         }
