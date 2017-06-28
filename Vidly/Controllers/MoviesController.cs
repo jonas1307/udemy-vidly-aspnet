@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -42,13 +43,18 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            return Content("id=" + id);
+            var movie = _context.Movies.Include(i => i.Genre).SingleOrDefault(s => s.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            return View(movie);
         }
 
         // GET /Movies
         public ActionResult Index(int? pageIndex, string sortBy)
         {
-            var movies = _context.Movies.ToList();
+            var movies = _context.Movies.Include(i => i.Genre).ToList();
 
             var viewModel = new MovieIndexViewModel() { Movies = movies };
 
@@ -60,16 +66,6 @@ namespace Vidly.Controllers
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
-        }
-
-        private List<Movie> FillMovies()
-        {
-            return new List<Movie>
-            {
-                new Movie{ Id = 1, Name = "Lolita" },
-                new Movie{ Id = 2, Name = "A Clockwork Orange" },
-                new Movie{ Id = 3, Name = "Transpotting" }
-            };
         }
     }
 }

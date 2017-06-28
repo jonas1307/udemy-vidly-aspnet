@@ -251,6 +251,7 @@
     <Content Include="Views\Costumer\Index.cshtml" />
     <Content Include="Views\Costumer\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

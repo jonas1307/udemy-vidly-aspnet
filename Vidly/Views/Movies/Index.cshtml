@@ -9,7 +9,8 @@
 <table class="table table-bordered table-hover">
     <thead>
     <tr>
-        <th>Movies</th>
+        <th>Movie</th>
+        <th>Genre</th>
     </tr>
     </thead>
     <tbody>
@@ -18,14 +19,15 @@
         foreach (var movie in Model.Movies)
         {
             <tr>
-                <td>@movie.Name</td>
+                <td>@Html.ActionLink(movie.Name, "Edit", new { id = movie.Id })</td>
+                <td>@movie.Genre.Name</td>
             </tr>
         }
     }
     else
     {
         <tr>
-            <td>There are no movies.</td>
+            <td colspan="2">There are no movies.</td>
         </tr>
     }
     </tbody>
