@@ -177,6 +177,10 @@
     <Compile Include="Migrations\201706280109588_AddMembershipTypeName.Designer.cs">
       <DependentUpon>201706280109588_AddMembershipTypeName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706280111273_UpdateExistingMembershipNames.cs" />
+    <Compile Include="Migrations\201706280111273_UpdateExistingMembershipNames.Designer.cs">
+      <DependentUpon>201706280111273_UpdateExistingMembershipNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Costumer.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -266,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706280109588_AddMembershipTypeName.resx">
       <DependentUpon>201706280109588_AddMembershipTypeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280111273_UpdateExistingMembershipNames.resx">
+      <DependentUpon>201706280111273_UpdateExistingMembershipNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
