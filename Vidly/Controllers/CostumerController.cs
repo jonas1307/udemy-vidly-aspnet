@@ -8,11 +8,11 @@ namespace Vidly.Controllers
 {
     public class CostumerController : Controller
     {
-        private Contexto _context;
+        private ApplicationDbContext _context;
 
         public CostumerController()
         {
-            _context = new Contexto();
+            _context = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
@@ -31,7 +31,7 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            var costumer = _context.Costumers.SingleOrDefault(s => s.Id == id);
+            var costumer = _context.Costumers.Include(c => c.MembershipType).SingleOrDefault(s => s.Id == id);
 
             if (costumer == null)
                 return HttpNotFound();
