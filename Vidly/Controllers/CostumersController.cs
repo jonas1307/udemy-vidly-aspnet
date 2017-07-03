@@ -6,11 +6,11 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
-    public class CostumerController : Controller
+    public class CostumersController : Controller
     {
         private ApplicationDbContext _context;
 
-        public CostumerController()
+        public CostumersController()
         {
             _context = new ApplicationDbContext();
         }
@@ -24,12 +24,12 @@ namespace Vidly.Controllers
         {
             var membershipTypes = _context.MembershipTypes.ToList();
 
-            var viewModel = new NewCostumerViewModel
+            var viewModel = new CostumerFormViewModel
             {
                 MembershipTypes = membershipTypes
             };
 
-            return View(viewModel);
+            return View("CostumerForm", viewModel);
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@ namespace Vidly.Controllers
             _context.Costumers.Add(costumer);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Costumer");
+            return RedirectToAction("Index", "Costumers");
         }
 
         public ActionResult Index()
@@ -57,7 +57,13 @@ namespace Vidly.Controllers
             if (costumer == null)
                 return HttpNotFound();
 
-            return View(costumer);
+            var viewModel = new CostumerFormViewModel
+            {
+                Costumer = costumer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CostumerForm", viewModel);
         }
     }
 }

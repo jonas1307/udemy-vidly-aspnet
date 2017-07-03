@@ -3,7 +3,7 @@ using Vidly.Models;
 
 namespace Vidly.ViewModels
 {
-    public class NewCostumerViewModel
+    public class CostumerFormViewModel
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
 
