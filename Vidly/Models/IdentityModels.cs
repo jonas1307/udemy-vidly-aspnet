@@ -10,6 +10,8 @@ namespace Vidly.Models
 
         public DbSet<Genre> Genres { get; set; }
 
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -1,4 +1,4 @@
-﻿@model Vidly.Models.Costumer
+﻿@model Vidly.ViewModels.NewCostumerViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,16 +9,20 @@
 @using (Html.BeginForm("Create", "Costumer"))
 {
     <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Costumer.Name)
+        @Html.TextBoxFor(m => m.Costumer.Name, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Birthday)
-        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Costumer.Birthday)
+        @Html.TextBoxFor(m => m.Costumer.Birthday, new { @class = "form-control" })
     </div>
     <div class="checkbox">
         <label>
-            @Html.CheckBoxFor(m => m.IsSubscribedToNewsletter) Subscribed to Newsletter?
+            @Html.CheckBoxFor(m => m.Costumer.IsSubscribedToNewsletter) Subscribed to Newsletter?
         </label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Costumer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Costumer.MembershipTypeId,new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
     </div>
 }

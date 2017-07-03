@@ -206,6 +206,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CostumerIndexViewModel.cs" />
     <Compile Include="ViewModels\MovieIndexViewModel.cs" />
+    <Compile Include="ViewModels\NewCostumerViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
