@@ -6,29 +6,31 @@
 
 <h2>Costumers</h2>
 
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Costumer List</th>
-            <th>Discount Rate</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Costumers.Count > 0)
-        {
-            foreach (var costumer in Model.Costumers)
+@Html.ActionLink("New Costumer", "New", null, new { @class = "btn btn-primary" })
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Costumer List</th>
+                <th>Discount Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Costumers.Count > 0)
+            {
+                foreach (var costumer in Model.Costumers)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(costumer.Name, "Edit", new { id = costumer.Id })</td>
+                        <td>@costumer.MembershipType.Name</td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@Html.ActionLink(costumer.Name, "Edit", new {id = costumer.Id})</td>
-                    <td>@costumer.MembershipType.Name</td>
+                    <td>There are no costumers.</td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td>There are no costumers.</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
