@@ -33,9 +33,27 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Costumer costumer)
+        public ActionResult Save(Costumer costumer)
         {
-            _context.Costumers.Add(costumer);
+            if (costumer.Id == 0)
+            {
+                _context.Costumers.Add(costumer);
+            }
+            else
+            {
+                var costumerInDb = _context.Costumers.First(f => f.Id == costumer.Id);
+
+                // Microsoft approach to update all data
+                //TryUpdateModel(costumerInDb);
+
+                // DTO - Data Transfer Object - Scopes for Automapping updates
+
+                costumerInDb.Name = costumer.Name;
+                costumerInDb.Birthday = costumer.Birthday;
+                costumerInDb.MembershipTypeId = costumer.MembershipTypeId;
+                costumerInDb.IsSubscribedToNewsletter = costumer.IsSubscribedToNewsletter;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Costumers");
