@@ -34,6 +34,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Costumer costumer)
         {
             if (!ModelState.IsValid)
