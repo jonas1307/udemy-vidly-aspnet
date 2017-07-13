@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Vidly.Dto;
+using Vidly.DTO;
 using Vidly.Models;
 
 namespace Vidly.App_Start
@@ -10,6 +11,8 @@ namespace Vidly.App_Start
         {
             Mapper.CreateMap<Costumer, CostumerDto>();
             Mapper.CreateMap<CostumerDto, Costumer>();
+            Mapper.CreateMap<Movie, MovieDto>();
+            Mapper.CreateMap<MovieDto, Movie>();
         }
     }
 }
