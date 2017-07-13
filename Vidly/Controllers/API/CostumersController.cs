@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -24,22 +25,22 @@ namespace Vidly.Controllers.Api
         }
 
         // GET /api/costumers/1
-        public CostumerDto GetCostumer(int id)
+        public IHttpActionResult GetCostumer(int id)
         {
             var costumer = _context.Costumers.FirstOrDefault(f => f.Id == id);
 
             if (costumer == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<Costumer, CostumerDto>(costumer);
+            return Ok(Mapper.Map<Costumer, CostumerDto>(costumer));
         }
 
         // POST /api/costumers
         [HttpPost]
-        public CostumerDto CreateCostumer(CostumerDto costumerDto)
+        public IHttpActionResult CreateCostumer(CostumerDto costumerDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var costumer = Mapper.Map<CostumerDto, Costumer>(costumerDto);
 
@@ -48,7 +49,7 @@ namespace Vidly.Controllers.Api
 
             costumerDto.Id = costumer.Id;
 
-            return costumerDto;
+            return Created(new Uri(Request.RequestUri + "/" + costumer.Id), costumerDto);
         }
 
         [HttpPut]
