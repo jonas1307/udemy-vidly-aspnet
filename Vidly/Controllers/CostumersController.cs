@@ -74,11 +74,11 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            var costumers = _context.Costumers.Include(x => x.MembershipType).ToList();
+            //var costumers = _context.Costumers.Include(x => x.MembershipType).ToList();
 
-            var viewModel = new CostumerIndexViewModel { Costumers = costumers };
+            //var viewModel = new CostumerIndexViewModel { Costumers = costumers };
 
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult Edit(int id)

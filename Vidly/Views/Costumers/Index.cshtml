@@ -1,5 +1,4 @@
-﻿@model Vidly.ViewModels.CostumerIndexViewModel
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,34 +15,36 @@
             <th>Delete</th>
         </tr>
     </thead>
-    <tbody>
-        @if (Model.Costumers.Count > 0)
-        {
-            foreach (var costumer in Model.Costumers)
-            {
-                <tr>
-                    <td>@Html.ActionLink(costumer.Name, "Edit", new { id = costumer.Id })</td>
-                    <td>@costumer.MembershipType.Name</td>
-                    <td>
-                        <button data-costumer-id="@costumer.Id" class="btn-link js-delete">Delete</button>
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr>
-                <td>There are no costumers.</td>
-            </tr>
-        }
-    </tbody>
+    <tbody></tbody>
 </table>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            $("#costumers").DataTable();
+            $("#costumers").DataTable({
+                ajax: {
+                    url: "/api/costumers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, costumer) {
+                            return "<a href='/costumers/edit/" + costumer.id + "'>" + costumer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-costumer-id=" + data + "> Delete</button>";
+                        }
+                    }
+                ]
+            });
 
             $("#costumers").on("click", ".js-delete",
                 function () {
