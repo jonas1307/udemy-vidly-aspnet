@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using AutoMapper;
-using Vidly.DTO;
+using Vidly.Dtos;
 using Vidly.Models;
 
 namespace Vidly.Controllers.API

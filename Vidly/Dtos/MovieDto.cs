@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Vidly.Models;
 
-namespace Vidly.DTO
+namespace Vidly.Dtos
 {
     public class MovieDto
     {

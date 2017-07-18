@@ -166,8 +166,9 @@
     <Compile Include="Controllers\CostumersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
-    <Compile Include="DTO\CostumerDto.cs" />
-    <Compile Include="DTO\MovieDto.cs" />
+    <Compile Include="Dtos\CostumerDto.cs" />
+    <Compile Include="Dtos\MembershipTypeDto.cs" />
+    <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
