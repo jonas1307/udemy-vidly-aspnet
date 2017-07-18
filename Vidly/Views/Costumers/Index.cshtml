@@ -22,7 +22,7 @@
 {
     <script>
         $(document).ready(function () {
-            $("#costumers").DataTable({
+            var table = $("#costumers").DataTable({
                 ajax: {
                     url: "/api/costumers",
                     dataSrc: ""
@@ -56,13 +56,11 @@
                                 url: "/api/costumers/" + button.attr("data-costumer-id"),
                                 method: "DELETE",
                                 success: function () {
-                                    button.parents("tr").remove();
+                                    table.row(button.parents("tr")).remove().draw();
                                 }
-
                             });
                         }
                     });
-
                 });
         });
     </script>
