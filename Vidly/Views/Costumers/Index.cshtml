@@ -43,11 +43,11 @@
 {
     <script>
         $(document).ready(function () {
-            $("#costumers .js-delete").on("click",
+            $("#costumers").on("click", ".js-delete",
                 function () {
                     var button = $(this);
 
-                    bootbox.confirm("Are you sure you want to delete this costumer?", function () {
+                    bootbox.confirm("Are you sure you want to delete this costumer?", function (result) {
                         if (result) {
                             $.ajax({
                                 url: "/api/costumers/" + button.attr("data-costumer-id"),
