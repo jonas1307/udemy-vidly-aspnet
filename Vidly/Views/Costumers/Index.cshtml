@@ -43,6 +43,8 @@
 {
     <script>
         $(document).ready(function () {
+            $("#costumers").DataTable();
+
             $("#costumers").on("click", ".js-delete",
                 function () {
                     var button = $(this);
