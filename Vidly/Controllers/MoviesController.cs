@@ -57,13 +57,9 @@ namespace Vidly.Controllers
         }
 
         // GET /Movies
-        public ActionResult Index(int? pageIndex, string sortBy)
+        public ActionResult Index()
         {
-            var movies = _context.Movies.Include(i => i.Genre).ToList();
-
-            var viewModel = new MovieIndexViewModel() { Movies = movies };
-
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult New()

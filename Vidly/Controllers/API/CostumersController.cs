@@ -19,7 +19,6 @@ namespace Vidly.Controllers.Api
             _context = new ApplicationDbContext();
         }
         
-        // GET /api/costumers
         public IEnumerable<CostumerDto> GetCostumers()
         {
             return _context.Costumers
@@ -28,7 +27,6 @@ namespace Vidly.Controllers.Api
                 .Select(Mapper.Map<Costumer, CostumerDto>);
         }
 
-        // GET /api/costumers/1
         public IHttpActionResult GetCostumer(int id)
         {
             var costumer = _context.Costumers.FirstOrDefault(f => f.Id == id);
@@ -39,7 +37,6 @@ namespace Vidly.Controllers.Api
             return Ok(Mapper.Map<Costumer, CostumerDto>(costumer));
         }
 
-        // POST /api/costumers
         [HttpPost]
         public IHttpActionResult CreateCostumer(CostumerDto costumerDto)
         {

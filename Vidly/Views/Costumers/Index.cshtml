@@ -50,17 +50,18 @@
                 function () {
                     var button = $(this);
 
-                    bootbox.confirm("Are you sure you want to delete this costumer?", function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/costumers/" + button.attr("data-costumer-id"),
-                                method: "DELETE",
-                                success: function () {
-                                    table.row(button.parents("tr")).remove().draw();
-                                }
-                            });
-                        }
-                    });
+                    bootbox.confirm("Are you sure you want to delete this costumer?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/costumers/" + button.attr("data-costumer-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
                 });
         });
     </script>
