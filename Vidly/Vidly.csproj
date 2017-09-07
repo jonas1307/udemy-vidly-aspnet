@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201709071945100_AddRental.Designer.cs">
       <DependentUpon>201709071945100_AddRental.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709072001368_AddNumberAvaliableInMovie.cs" />
+    <Compile Include="Migrations\201709072001368_AddNumberAvaliableInMovie.Designer.cs">
+      <DependentUpon>201709072001368_AddNumberAvaliableInMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Costumer.cs" />
@@ -631,6 +635,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709071945100_AddRental.resx">
       <DependentUpon>201709071945100_AddRental.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709072001368_AddNumberAvaliableInMovie.resx">
+      <DependentUpon>201709072001368_AddNumberAvaliableInMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

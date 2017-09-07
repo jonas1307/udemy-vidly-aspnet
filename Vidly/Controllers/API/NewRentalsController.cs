@@ -29,10 +29,10 @@ namespace Vidly.Controllers.API
 
             foreach (var item in movies)
             {
-                if (item.NumberInStock == 0)
+                if (item.NumberAvaliable == 0)
                     return BadRequest("Requested movie is not avaliable.");
 
-                item.NumberInStock--;
+                item.NumberAvaliable--;
 
                 _context.Rentals.Add(new Rental
                 {
