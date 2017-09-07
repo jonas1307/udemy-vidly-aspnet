@@ -19,6 +19,7 @@ namespace Vidly.Controllers.API
             _context.Dispose();
         }
 
+        [HttpPost]
         public IHttpActionResult CreateNewRental(NewRentalDto data)
         {
             var costumerInDb = _context.Costumers.Single(f => f.Id == data.CostumerId);
