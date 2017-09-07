@@ -40,9 +40,9 @@ namespace Vidly.Controllers.API
                     Movie = item,
                     DateOfRent = DateTime.Now
                 });
-
-                _context.SaveChanges();
             }
+
+            _context.SaveChanges();
 
             return Ok();
         }
