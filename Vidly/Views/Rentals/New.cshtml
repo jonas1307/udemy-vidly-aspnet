@@ -10,13 +10,13 @@
     <div class="form-group">
         <label>Costumer</label>
         <div class="tt-container">
-            <input id="costumer" type="text" value="" class="form-control" />
+            <input id="costumer" name="costumer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <label>Movie</label>
         <div class="tt-container">
-            <input id="movie" type="text" value="" class="form-control"/>
+            <input id="movie" name="movie" data-rule-validMovie="true" type="text" value="" class="form-control"/>
         </div>
     </div>
     
@@ -31,8 +31,9 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             var vm = {
                 moviesId: []
@@ -57,49 +58,73 @@
             });
 
             $('#costumer').typeahead({
-                minLength: 3,
-                highlight: true
-            },
+                    minLength: 3,
+                    highlight: true
+                },
                 {
                     name: 'costumers',
                     display: 'name',
                     source: costumers
                 }).on("typeahead:select",
-                function (e, costumer) {
+                function(e, costumer) {
                     vm.costumerId = costumer.id;
                 });
 
             $('#movie').typeahead({
-                minLength: 3,
-                highlight: true
-            },
+                    minLength: 3,
+                    highlight: true
+                },
                 {
                     name: 'movies',
                     display: 'name',
                     source: movies
                 }).on("typeahead:select",
-                function (e, movie) {
-                    $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
-
-                    $("#movie").typeahead("val", "");
+                function(e, movie) {
 
                     vm.moviesId.push(movie.id);
+
+                    $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
+                    $("#movie").typeahead("val", "");
                 });
 
-            $("#newRental").submit(function(e) {
-                e.preventDefault();
+            $.validator.addMethod("validCustomer",
+                function() {
+                    return vm.costumerId && vm.costumerId !== 0;
+                },
+                "Please select a valid costumer.");
 
-                $.ajax({
-                        url: "/API/newRentals",
-                        method: "POST",
-                        data: vm
-                    })
-                    .done(function() {
-                        toastr.success("Rentals successfully recorded.");
-                    })
-                    .fail(function() {
-                        toastr.error("Something unexpected happened.");
-                    });
+            $.validator.addMethod("validMovie",
+                function() {
+                    return vm.moviesId.length > 0;
+                },
+                "Please select at least one movie.");
+
+            var validator = $("#newRental").validate({
+                submitHandler: function() {
+
+                    $.ajax({
+                            url: "/API/newRentals",
+                            method: "POST",
+                            data: vm
+                        })
+                        .done(function() {
+
+                            toastr.success("Rentals successfully recorded.");
+
+                            $("#costumer").typeahead("val", "");
+                            $("#movie").typeahead("val", "");
+                            $("#movies").empty();
+
+                            vm = { moviesId: [] };
+
+                            validator.resetForm();
+                        })
+                        .fail(function() {
+                            toastr.error("Something unexpected happened.");
+                        });
+
+                    return false;
+                }
             });
         });
     </script>
